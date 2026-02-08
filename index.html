@@ -3,217 +3,192 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Valentine 💖</title>
+<title>For Harinie 💖</title>
 
 <style>
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
 body {
-  min-height: 100vh;
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(circle at top, #ffb3c6, #ff758f);
   display: flex;
-  justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #ff758c, #ff7eb3);
-  font-family: Arial, sans-serif;
+  justify-content: center;
   overflow: hidden;
 }
 
-/* Heart rain */
-.heart-rain::before {
-  content: "💖 💕 💘 💓 💗 💞 💝";
-  position: fixed;
-  top: -40px;
-  width: 100%;
-  text-align: center;
-  font-size: 28px;
-  animation: rain 10s linear infinite;
+/* Floating hearts background */
+.heart {
+  position: absolute;
+  font-size: 20px;
+  animation: floatUp linear infinite;
+  opacity: 0.7;
 }
 
-@keyframes rain {
-  from { transform: translateY(0); }
-  to { transform: translateY(120vh); }
+@keyframes floatUp {
+  from {
+    transform: translateY(100vh) scale(0.5);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-10vh) scale(1.2);
+    opacity: 0;
+  }
 }
 
 /* Card */
 .card {
   background: white;
+  width: 360px;
   padding: 25px;
-  border-radius: 25px;
+  border-radius: 30px;
   text-align: center;
-  width: 90%;
-  max-width: 360px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.25);
   animation: pop 1s ease;
-  position: relative;
-  z-index: 2;
 }
 
 @keyframes pop {
-  from { transform: scale(0.6); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+  0% { transform: scale(0.6); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
-/* Photo */
-.photo {
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 6px solid #ff4d6d;
+/* Image */
+.card img {
+  width: 100%;
+  border-radius: 25px;
   margin-bottom: 15px;
 }
 
+/* Text */
 h2 {
-  color: #ff4d6d;
+  color: #ff477e;
+  margin-bottom: 5px;
 }
 
 h1 {
   font-size: 22px;
   color: #333;
-  margin-top: 5px;
 }
 
 /* Buttons */
 .buttons {
   margin-top: 20px;
+  position: relative;
+  height: 70px;
 }
 
 button {
-  padding: 12px 24px;
-  font-size: 16px;
-  border: none;
+  padding: 12px 26px;
   border-radius: 30px;
-  margin: 10px;
+  border: none;
+  font-size: 16px;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: 0.3s;
+  position: absolute;
 }
 
-button:hover {
-  transform: scale(1.12);
-  box-shadow: 0 8px 15px rgba(0,0,0,0.25);
-}
-
-button:first-child {
-  background: #ff4d6d;
+#yesBtn {
+  background: linear-gradient(135deg, #ff4d6d, #ff758f);
   color: white;
+  left: 40px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
 }
 
 #noBtn {
   background: #eee;
-  position: absolute;
+  color: #444;
+  right: 40px;
 }
 
-/* YES Screen */
-.yes-screen {
-  display: none;
+/* Fireworks */
+.spark {
   position: fixed;
-  inset: 0;
-  background: linear-gradient(135deg, #ff758c, #ff7eb3);
-  color: white;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  z-index: 5;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: spark 1s ease-out forwards;
 }
 
-.yes-screen h1 {
-  font-size: 42px;
-}
-
-.yes-screen p {
-  font-size: 20px;
-  margin-top: 10px;
+@keyframes spark {
+  from { transform: scale(0); opacity: 1; }
+  to { transform: scale(20); opacity: 0; }
 }
 </style>
 </head>
 
 <body>
 
-<div class="heart-rain"></div>
+<!-- Floating hearts -->
+<script>
+for (let i = 0; i < 25; i++) {
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.innerText = "💗";
+  h.style.left = Math.random() * 100 + "vw";
+  h.style.animationDuration = (5 + Math.random() * 5) + "s";
+  h.style.fontSize = (15 + Math.random() * 20) + "px";
+  document.body.appendChild(h);
+}
+</script>
 
-<div class="card" id="card">
-  <img
-    src="images/WhatsApp Image 2026-02-08 at 1.29.04 PM.jpeg"
-    class="photo"
-    alt="My Valentine"
-  />
+<div class="card">
+  <img src="images/love.jpg" alt="Love">
 
   <h2>Harinie 💕</h2>
   <h1>Will you be my Valentine? 💘</h1>
 
   <div class="buttons">
-    <button onclick="yesClicked()">YES 😍</button>
+    <button id="yesBtn">YES 😍</button>
     <button id="noBtn">NO 🙈</button>
   </div>
 </div>
 
-<div class="yes-screen" id="yesScreen">
-  <h1>I know Harinie, 💖</h1>
-  <p>You are my Valentine forever 😘💍</p>
-  <div>💞💞💞</div>
-</div>
-
-<canvas id="fireworks"></canvas>
-
 <script>
-const noBtn = document.getElementById("noBtn");
+let noMoves = 0;
 
-noBtn.addEventListener("mouseover", () => {
-  const x = Math.random() * 220 - 110;
-  const y = Math.random() * 220 - 110;
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+
+noBtn.addEventListener("mouseenter", () => {
+  if (noMoves >= 6) return;
+
+  const x = Math.random() * 200 - 100;
+  const y = Math.random() * 200 - 100;
+
   noBtn.style.transform = `translate(${x}px, ${y}px)`;
+  noMoves++;
 });
 
-function yesClicked() {
-  document.getElementById("card").style.display = "none";
-  document.getElementById("yesScreen").style.display = "flex";
-  startFireworks();
+yesBtn.addEventListener("click", () => {
+  for (let i = 0; i < 20; i++) fire();
+  alert("Yayyyy 💖 Harinie said YES!!!");
+});
+
+function fire() {
+  const s = document.createElement("div");
+  s.className = "spark";
+  s.style.left = Math.random() * window.innerWidth + "px";
+  s.style.top = Math.random() * window.innerHeight + "px";
+  s.style.background = `hsl(${Math.random()*360},100%,70%)`;
+  document.body.appendChild(s);
+  setTimeout(() => s.remove(), 1000);
 }
-
-/* Fireworks */
-const canvas = document.getElementById("fireworks");
-const ctx = canvas.getContext("2d");
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particles = [];
-
-function startFireworks() {
-  setInterval(() => {
-    for (let i = 0; i < 70; i++) {
-      particles.push({
-        x: canvas.width / 2,
-        y: canvas.height / 2,
-        vx: Math.random() * 7 - 3.5,
-        vy: Math.random() * 7 - 3.5,
-        life: 100
-      });
-    }
-  }, 300);
-}
-
-function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  particles.forEach((p, i) => {
-    p.x += p.vx;
-    p.y += p.vy;
-    p.life--;
-    ctx.fillStyle = "rgba(255,255,255,0.9)";
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
-    ctx.fill();
-    if (p.life <= 0) particles.splice(i, 1);
-  });
-  requestAnimationFrame(animate);
-}
-animate();
 </script>
+
+</body>
+</html>
+
 
 </body>
 </html>
